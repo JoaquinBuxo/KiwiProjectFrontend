@@ -1,23 +1,22 @@
-import logo from './logo.svg';
+import { useState } from "react";
 import './App.css';
 
 function App() {
+  const [wordCombination, setWordCombination] = useState();
+
+  const handleClick = async () => {
+    const response = await fetch("http://localhost:3001/t9/234").then((response) => response.json());
+    console.log(response);
+    setWordCombination(response);
+  };
+
+  const defaultCopy = "Here will appear the possible words combination";
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Click the numbers</h1>
+      <h2>{wordCombination || defaultCopy}</h2>
+      <button onClick={handleClick}>Check possible combinations</button>
     </div>
   );
 }
