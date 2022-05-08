@@ -17,9 +17,8 @@ export default function MobileContainer() {
         setWordCombinations(response);
     };
 
-    const handleKeyPressed = (event) => {
-        const keyValue = event.target.value;
-        setNumPressed(numPressed => [...numPressed, keyValue]);
+    const handleKeyPressed = (number) => {
+        setNumPressed(numPressed => [...numPressed, number]);
     }
 
     const reset = () => {

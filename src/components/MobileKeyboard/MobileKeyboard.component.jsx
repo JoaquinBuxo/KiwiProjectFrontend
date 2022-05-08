@@ -1,11 +1,9 @@
 import './MobileKeyboard.component.scss';
 
-import MobileKey from '../../components/MobileKey/MobileKey.component';
 import Grid from "@kiwicom/orbit-components/lib/utils/Grid";
 
 export default function MobileKeyboard(props) {
-
-    const keys = [1,2,3,4,5,6,7,8,9,'RESET','ENTER','FILTER'];
+    const numKeys = [...Array(9).keys()];
 
     return (
         <Grid className="MobileKeyboard"
@@ -13,8 +11,11 @@ export default function MobileKeyboard(props) {
             rows="repeat(4, 1fr)"
             rowGap="5px"
             columnGap="5px"
-        >
-            {keys.map( (key, index) => <MobileKey key={index} currentKey={key} keyPressed={props.handleKeyPressed} keyEnter={props.getCombinations} keyReset={props.reset} keyFilter={props.filterWords}/>)}
+        >        
+            {numKeys.map(key => <button className="keyButton keyButtonSecondaryColor" key={key} onClick={() => props.handleKeyPressed(key+1)}>{key+1}</button>)}
+            <button className="keyButton keyButtonCriticalColor" onClick={props.reset} >RESET</button>
+            <button className="keyButton keyButtonPrimaryColor" onClick={props.getCombinations} >ENTER</button>
+            <button className="keyButton keyButtonSecondaryColor" onClick={props.filterWords} >FILTER</button>
         </Grid> 
     );
 }
