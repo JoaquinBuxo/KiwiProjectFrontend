@@ -6,7 +6,7 @@ import Box from "@kiwicom/orbit-components/lib/Box";
 
 export default function MobileContainer() {
 
-    const [wordCombinations, setWordCombinations] = useState('');
+    const [wordCombinations, setWordCombinations] = useState([]);
     const [numPressed, setNumPressed] = useState([]);
     const dictionary = ['kiwi', 'ahoj', 'plane', 'train', 'hola']
 
@@ -23,7 +23,7 @@ export default function MobileContainer() {
 
     const reset = () => {
         setNumPressed('');
-        setWordCombinations('');
+        setWordCombinations([]);
     }
 
     const filterWords = () => {
