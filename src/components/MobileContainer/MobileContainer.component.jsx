@@ -4,17 +4,21 @@ import MobileScreen from "../MobileScreen/MobileScreen.component";
 import MobileKeyboard from "../MobileKeyboard/MobileKeyboard.component";
 import Box from "@kiwicom/orbit-components/lib/Box";
 import Alert from "@kiwicom/orbit-components/lib/Alert";
+import { Badge } from "@kiwicom/orbit-components";
 
 export default function MobileContainer() {
   const [wordCombinations, setWordCombinations] = useState([]);
   const [numPressed, setNumPressed] = useState([]);
   const [error, setError] = useState();
+  const [filterInfo, setFilterInfo] = useState();
   const dictionary = ["kiwi", "ahoj", "plane", "train", "hola"];
 
   const getCombinations = async () => {
     const numResult = numPressed.join("");
     try {
-      const request = await fetch(`https://kiwi-project-backend.vercel.app/api/t9/${numResult}`);
+      const request = await fetch(
+        `https://kiwi-project-backend.vercel.app/api/t9/${numResult}`
+      );
       const response = await request.json();
       setWordCombinations(response);
     } catch (err) {
@@ -35,19 +39,25 @@ export default function MobileContainer() {
     setWordCombinations(
       wordCombinations.filter((word) => dictionary.includes(word))
     );
+    setFilterInfo(true);
   };
 
   return (
     <Box className="MobileContainer" borderRadius="normal">
-      <MobileScreen
-        handleKeyPressed={numPressed}
-        combinations={wordCombinations}
-      />
       {error && (
         <Alert type="critical" icon>
           Something went wrong: {error}
         </Alert>
       )}
+      {filterInfo && (
+        <Alert type="info" icon title="Filter Information" closable="true" spaceAfter="-20px" onClose={() => setFilterInfo(false)}>
+          Right now the filter only works with some words {dictionary.map( element => <Badge>{element}</Badge>)}
+        </Alert>
+      )}
+      <MobileScreen
+        handleKeyPressed={numPressed}
+        combinations={wordCombinations}
+      />
       <MobileKeyboard
         onNumKeyPressed={handleKeyPressed}
         onEnter={getCombinations}
