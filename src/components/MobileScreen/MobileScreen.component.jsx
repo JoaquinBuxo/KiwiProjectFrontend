@@ -7,8 +7,8 @@ export default function MobileScreen(props) {
     return (
         <div className="MobileScreen">
             <Box width="100vw" height="60vh" padding="medium" borderRadius="normal" background="productLight">
-                <p className="screen-text"><b>Number clicked:</b><br/> {props.handleKeyPressed}</p>
-                <p className="screen-text"><b>Result Combinations:</b><br/><List>{props.combinations.map( item => <ListItem key={item}>{item}</ListItem>)}</List></p>
+                <h3>Number clicked:</h3>{props.handleKeyPressed}
+                <h3>Result Combinations:</h3><List>{props.combinations.map( item => <ListItem key={item}>{item}</ListItem>)}</List>
             </Box>      
         </div> 
     );
