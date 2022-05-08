@@ -34,7 +34,7 @@ export default function MobileContainer() {
     return (
         <Box className="MobileContainer" borderRadius="normal" >   
             <MobileScreen handleKeyPressed={numPressed} combinations={wordCombinations}/>
-            <MobileKeyboard handleKeyPressed={handleKeyPressed} getCombinations={getCombinations} reset={reset} filterWords={filterWords}/>           
+            <MobileKeyboard onNumKeyPressed={handleKeyPressed} onEnter={getCombinations} onReset={reset} onFilter={filterWords}/>           
         </Box>
     );
 }
