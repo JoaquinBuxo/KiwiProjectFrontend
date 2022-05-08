@@ -14,7 +14,7 @@ export default function MobileContainer() {
   const getCombinations = async () => {
     const numResult = numPressed.join("");
     try {
-      const request = await fetch(`http://localhost:3001/t9/${numResult}`);
+      const request = await fetch(`https://kiwi-project-backend.vercel.app/api/t9/${numResult}`);
       const response = await request.json();
       setWordCombinations(response);
     } catch (err) {
