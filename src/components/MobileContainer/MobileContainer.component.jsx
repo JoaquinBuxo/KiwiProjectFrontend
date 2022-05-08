@@ -2,26 +2,40 @@ import './MobileContainer.component.scss';
 import { useState } from "react";
 import MobileScreen from '../MobileScreen/MobileScreen.component';
 import MobileKeyboard from '../MobileKeyboard/MobileKeyboard.component';
+import Box from "@kiwicom/orbit-components/lib/Box";
 
 export default function MobileContainer() {
 
-    const [wordCombination, setWordCombination] = useState();
-    const [numPressed, setNumPressed] = useState();
+    const [wordCombinations, setWordCombinations] = useState('');
+    const [numPressed, setNumPressed] = useState([]);
+    const dictionary = ['kiwi', 'ahoj', 'plane', 'train', 'hola']
 
-    const checkCombinations = async () => {
-        const response = await fetch("http://localhost:3001/t9/234").then((response) => response.json());
-        setWordCombination(response);
+    const getCombinations = async () => {
+        const numResult = numPressed.join("");
+        const request = await fetch(`http://localhost:3001/t9/${numResult}`);
+        const response = await request.json();
+        setWordCombinations(response);
     };
 
-    let getKeyPressed = (event) => {
+    const handleKeyPressed = (event) => {
         const keyValue = event.target.value;
-        setNumPressed([... numPressed, keyValue]);
+        setNumPressed(numPressed => [...numPressed, keyValue]);
     }
 
+    const reset = () => {
+        setNumPressed('');
+        setWordCombinations('');
+    }
+
+    const filterWords = () => {
+        setWordCombinations( wordCombinations.filter( word => dictionary.includes(word)));
+    }
+
+
     return (
-        <div className="MobileContainer">
-            <MobileScreen />
-            <MobileKeyboard checkCombinations={getKeyPressed} />
-        </div>
+        <Box className="MobileContainer" borderRadius="normal" >   
+            <MobileScreen handleKeyPressed={numPressed} combinations={wordCombinations}/>
+            <MobileKeyboard handleKeyPressed={handleKeyPressed} getCombinations={getCombinations} reset={reset} filterWords={filterWords}/>           
+        </Box>
     );
 }

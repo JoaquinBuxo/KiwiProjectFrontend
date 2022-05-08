@@ -1,10 +1,10 @@
-import './MobileContainer.component.scss';
+import './ResultContainer.component.scss';
 
-export default function MobileContainer(props) {
+export default function ResultContainer() {
 
     return (
-        <div className="MobileContainer">
-            hola          
+        <div className="ResultContainer">
+            result container          
         </div> 
     );
 }
