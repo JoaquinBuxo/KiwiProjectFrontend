@@ -3,19 +3,10 @@ import PropTypes from "prop-types";
 
 import Grid from "@kiwicom/orbit-components/lib/utils/Grid";
 import Button from "@kiwicom/orbit-components/lib/Button";
+import { ToastRoot, createToast } from "@kiwicom/orbit-components/lib/Toast";
 
 export default function MobileKeyboard(props) {
-  const keyPhone = [
-    "",
-    "abc",
-    "def",
-    "ghi",
-    "jkl",
-    "mno",
-    "pqrs",
-    "tuv",
-    "wxyz",
-  ];
+  const keyPhone = ["abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"];
 
   return (
     <Grid
@@ -25,13 +16,20 @@ export default function MobileKeyboard(props) {
       rowGap="5px"
       columnGap="5px"
     >
+      <ToastRoot dismissTimeout={2500} />
+      <Button
+        type="secondary"
+        onClick={() => createToast("This button has no letters")}
+      >
+        1
+      </Button>
       {keyPhone.map((helperChars, index) => (
         <Button
           type="secondary"
           key={index}
-          onClick={() => props.onNumKeyPressed(index + 1)}
+          onClick={() => props.onNumKeyPressed(index + 2)}
         >
-          {index + 1}
+          {index + 2}
           <p className="helper-chars">{helperChars}</p>
         </Button>
       ))}
