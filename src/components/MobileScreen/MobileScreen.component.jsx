@@ -7,10 +7,10 @@ export default function MobileScreen(props) {
     <div className="MobileScreen">
       <Box
         width="100vw"
-        height="60vh"
+        height="75vh"
         padding="medium"
         borderRadius="normal"
-        background="productLight"
+        overflow="scroll"
       >
         <h3>Number clicked:</h3>
         {props.handleKeyPressed}
