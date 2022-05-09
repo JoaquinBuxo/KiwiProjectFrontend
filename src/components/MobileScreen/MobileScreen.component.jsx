@@ -16,7 +16,7 @@ export default function MobileScreen(props) {
       direction="column"
     >
       <h3>Number clicked:</h3>
-      {props.handleKeyPressed}
+      <Box height="20px">{props.handleKeyPressed}</Box>
       <h3>Result Combinations:</h3>
       <Box height="55vh" overflow="scroll">
         {props.loading && <Loading />}
