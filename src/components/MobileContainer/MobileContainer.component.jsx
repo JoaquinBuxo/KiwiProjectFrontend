@@ -4,14 +4,14 @@ import MobileScreen from "../MobileScreen/MobileScreen.component";
 import MobileKeyboard from "../MobileKeyboard/MobileKeyboard.component";
 import Box from "@kiwicom/orbit-components/lib/Box";
 import Alert from "@kiwicom/orbit-components/lib/Alert";
-import { Badge } from "@kiwicom/orbit-components";
+import { Badge, Stack } from "@kiwicom/orbit-components";
 
 export default function MobileContainer() {
   const [wordCombinations, setWordCombinations] = useState([]);
   const [numPressed, setNumPressed] = useState([]);
   const [error, setError] = useState();
   const [filterInfo, setFilterInfo] = useState();
-  const dictionary = ["kiwi", "ahoj", "plane", "train", "hola"];
+  const dictionary = ["kiwi", "travel", "ahoj", "plane", "train", "hola"];
 
   const getCombinations = async () => {
     const numResult = numPressed.join("");
@@ -57,11 +57,14 @@ export default function MobileContainer() {
           closable="true"
           spaceAfter="-20px"
           onClose={() => setFilterInfo(false)}
-        >
-          Right now the filter only works with some words
+        ><Box>
+          <p>Right now the filter only works with some words</p>
+          <Stack spacing="small" inline="true">
           {dictionary.map((element) => (
             <Badge>{element}</Badge>
           ))}
+          </Stack>
+          </Box>
         </Alert>
       )}
       <MobileScreen
