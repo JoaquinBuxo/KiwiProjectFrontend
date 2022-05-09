@@ -1,4 +1,6 @@
 import "./MobileScreen.component.scss";
+import PropTypes from "prop-types";
+
 import Box from "@kiwicom/orbit-components/lib/Box";
 import List, { ListItem } from "@kiwicom/orbit-components/lib/List";
 
@@ -27,3 +29,8 @@ export default function MobileScreen(props) {
     </div>
   );
 }
+
+MobileScreen.propTypes = {
+  handleKeyPressed: PropTypes.array.isRequired,
+  combinations: PropTypes.array.isRequired,
+};

@@ -50,8 +50,18 @@ export default function MobileContainer() {
         </Alert>
       )}
       {filterInfo && (
-        <Alert type="info" icon title="Filter Information" closable="true" spaceAfter="-20px" onClose={() => setFilterInfo(false)}>
-          Right now the filter only works with some words {dictionary.map( element => <Badge>{element}</Badge>)}
+        <Alert
+          type="info"
+          icon
+          title="Filter Information"
+          closable="true"
+          spaceAfter="-20px"
+          onClose={() => setFilterInfo(false)}
+        >
+          Right now the filter only works with some words
+          {dictionary.map((element) => (
+            <Badge>{element}</Badge>
+          ))}
         </Alert>
       )}
       <MobileScreen
