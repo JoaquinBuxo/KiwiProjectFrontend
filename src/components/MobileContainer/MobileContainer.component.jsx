@@ -9,17 +9,20 @@ import { Badge, Stack } from "@kiwicom/orbit-components";
 export default function MobileContainer() {
   const [wordCombinations, setWordCombinations] = useState([]);
   const [numPressed, setNumPressed] = useState([]);
-  const [error, setError] = useState();
-  const [filterInfo, setFilterInfo] = useState();
+  const [error, setError] = useState(false);
+  const [filterInfo, setFilterInfo] = useState(false);
+  const [loading, setLoading] = useState(false);
   const dictionary = ["kiwi", "travel", "ahoj", "plane", "train", "hola"];
 
   const getCombinations = async () => {
     const numResult = numPressed.join("");
     try {
+      setLoading(true);
       const request = await fetch(
         `https://kiwi-project-backend.vercel.app/api/t9/${numResult}`
       );
       const response = await request.json();
+      setLoading(false);
       setWordCombinations(response);
     } catch (err) {
       setError(err.message || "unexpected error");
@@ -77,6 +80,7 @@ export default function MobileContainer() {
       <MobileScreen
         handleKeyPressed={numPressed}
         combinations={wordCombinations}
+        loading={loading}
       />
       <MobileKeyboard
         onNumKeyPressed={handleKeyPressed}
