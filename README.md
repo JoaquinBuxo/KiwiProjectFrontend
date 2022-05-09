@@ -6,6 +6,7 @@ For example, given the input “23” the output should be: ad, ae, af, bd, be, 
 cf.
 
 You can see the result here: https://kiwi-project-frontend.vercel.app/
+
 ## Installation
 
 First you will need to install [Node.js](https://nodejs.org/) and then run the scripts in the following order:
@@ -13,6 +14,7 @@ First you will need to install [Node.js](https://nodejs.org/) and then run the s
 ### `npm install`
 
 Will install all the necessary dependencies that are in the package.json
+
 ### `npm start`
 
 Runs the app in the development mode.\

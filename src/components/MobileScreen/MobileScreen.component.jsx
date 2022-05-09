@@ -19,7 +19,7 @@ export default function MobileScreen(props) {
       {props.handleKeyPressed}
       <h3>Result Combinations:</h3>
       <Box height="55vh" overflow="scroll">
-      {props.loading && <Loading />}
+        {props.loading && <Loading />}
         <List>
           {props.combinations.map((item, index) => (
             <ListItem type="primary" key={item} icon={index + 1}>

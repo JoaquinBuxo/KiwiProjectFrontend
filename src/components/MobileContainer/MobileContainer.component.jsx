@@ -12,20 +12,27 @@ export default function MobileContainer() {
   const [error, setError] = useState(false);
   const [filterInfo, setFilterInfo] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [wrongNum, setWrongNum] = useState(false);
   const dictionary = ["kiwi", "travel", "ahoj", "plane", "train", "hola"];
 
   const getCombinations = async () => {
     const numResult = numPressed.join("");
-    try {
-      setLoading(true);
-      const request = await fetch(
-        `https://kiwi-project-backend.vercel.app/api/t9/${numResult}`
-      );
-      const response = await request.json();
-      setLoading(false);
-      setWordCombinations(response);
-    } catch (err) {
-      setError(err.message || "unexpected error");
+    if (numResult != "") {
+      try {
+        setWrongNum(false);
+        setLoading(true);
+        console.log(numResult == "");
+        const request = await fetch(
+          `https://kiwi-project-backend.vercel.app/api/t9/${numResult}`
+        );
+        const response = await request.json();
+        setLoading(false);
+        setWordCombinations(response);
+      } catch (err) {
+        setError(err.message || "unexpected error");
+      }
+    } else {
+      setWrongNum(true);
     }
   };
 
@@ -54,8 +61,19 @@ export default function MobileContainer() {
       position="relative"
     >
       {error && (
-        <Alert type="critical" icon>
+        <Alert type="critical" title="Error" icon>
           Something went wrong: {error}
+        </Alert>
+      )}
+      {wrongNum && (
+        <Alert
+          type="warning"
+          icon
+          title="Wrong number"
+          closable="true"
+          onClose={() => setWrongNum(false)}
+        >
+          Please, select a correct number
         </Alert>
       )}
       {filterInfo && (
@@ -64,7 +82,6 @@ export default function MobileContainer() {
           icon
           title="Filter Information"
           closable="true"
-          spaceAfter="-20px"
           onClose={() => setFilterInfo(false)}
         >
           <Box>
