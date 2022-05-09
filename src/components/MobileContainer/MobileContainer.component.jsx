@@ -31,7 +31,7 @@ export default function MobileContainer() {
   };
 
   const reset = () => {
-    setNumPressed("");
+    setNumPressed([]);
     setWordCombinations([]);
   };
 
@@ -43,7 +43,13 @@ export default function MobileContainer() {
   };
 
   return (
-    <Box className="MobileContainer" borderRadius="normal">
+    <Box
+      className="MobileContainer"
+      height="full"
+      display="flex"
+      direction="column"
+      position="relative"
+    >
       {error && (
         <Alert type="critical" icon>
           Something went wrong: {error}
@@ -57,13 +63,14 @@ export default function MobileContainer() {
           closable="true"
           spaceAfter="-20px"
           onClose={() => setFilterInfo(false)}
-        ><Box>
-          <p>Right now the filter only works with some words</p>
-          <Stack spacing="small" inline="true">
-          {dictionary.map((element) => (
-            <Badge>{element}</Badge>
-          ))}
-          </Stack>
+        >
+          <Box>
+            <p>Right now the filter only works with some words</p>
+            <Stack spacing="small" inline="true">
+              {dictionary.map((element) => (
+                <Badge>{element}</Badge>
+              ))}
+            </Stack>
           </Box>
         </Alert>
       )}
